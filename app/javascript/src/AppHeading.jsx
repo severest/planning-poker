@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import MapRounded from '@material-ui/icons/MapRounded';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
     heading: {
         display: 'flex',
@@ -11,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
             marginRight: theme.spacing(1),
         },
         padding: theme.spacing(1),
-        background: theme.palette.primary.light,
-        color: 'white',
-        borderRadius: theme.spacing(1),
+        borderBottom: `3px solid ${theme.palette.primary.light}`,
     },
 }));
 const AppHeading = () => {

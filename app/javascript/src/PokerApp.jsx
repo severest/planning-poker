@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import AppHeading from './AppHeading.jsx';
+import AppBody from './AppBody.jsx';
 import EstimateButtons from './EstimateButtons.jsx';
 import { connectToPokerPlanning } from './utils/websocket.js';
 
@@ -14,10 +14,6 @@ const useStyles = (theme) => ({
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-    },
-    main: {
-        marginTop: theme.spacing(8),
-        marginBottom: theme.spacing(2),
     },
     footer: {
         padding: theme.spacing(3, 2),
@@ -39,11 +35,9 @@ class PokerApp extends React.PureComponent {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
-                <Container component="main" className={classes.main} maxWidth="sm">
-                    <AppHeading />
-
-                    <Typography variant="body1">Sticky foolter</Typography>
-                </Container>
+                <AppBody>
+                    weee
+                </AppBody>
                 <footer className={classes.footer}>
                     <Container maxWidth="sm">
                         <EstimateButtons

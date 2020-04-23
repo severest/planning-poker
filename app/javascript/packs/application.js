@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 
+import HomeApp from '../src/HomeApp.jsx';
 import PokerApp from '../src/PokerApp.jsx';
 import NoMatch from '../src/NoMatch.jsx';
 
@@ -29,6 +30,7 @@ ReactDOM.render((
         <CssBaseline />
         <BrowserRouter>
             <Switch>
+                <Route path="/" exact component={HomeApp} />
                 <Route path="/:key" component={PokerApp} />
                 <Route component={NoMatch} />
             </Switch>
