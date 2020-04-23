@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 
 import PokerApp from '../src/PokerApp.jsx';
 import NoMatch from '../src/NoMatch.jsx';
 
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+    },
+});
 ReactDOM.render((
-    <>
+    <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
             <Switch>
@@ -15,5 +23,5 @@ ReactDOM.render((
                 <Route component={NoMatch} />
             </Switch>
         </BrowserRouter>
-    </>
+    </ThemeProvider>
 ), document.getElementById('app'));
