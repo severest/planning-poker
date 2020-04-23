@@ -8,6 +8,16 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import PokerApp from '../src/PokerApp.jsx';
 import NoMatch from '../src/NoMatch.jsx';
 
+import uuid from '../src/utils/uuid.js';
+
+
+let userId = localStorage.getItem('planningPokerId');
+if (!userId) {
+    userId = uuid();
+    localStorage.setItem('planningPokerId', userId);
+}
+window.myId = userId;
+
 
 const theme = createMuiTheme({
     palette: {

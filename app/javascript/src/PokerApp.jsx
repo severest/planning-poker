@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import AppHeading from './AppHeading.jsx';
 import EstimateButtons from './EstimateButtons.jsx';
+import { connectToPokerPlanning } from './utils/websocket.js';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -23,29 +24,36 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 'auto',
         backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     },
-}));
-const PokerApp = ({}) => {
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            <Container component="main" className={classes.main} maxWidth="sm">
-                <AppHeading />
+});
+class PokerApp extends React.PureComponent {
+    static propTypes = {
+        classes: PropTypes.object.isRequired,
+        match: PropTypes.object.isRequired,
+    }
 
-                <Typography variant="body1">Sticky foolter</Typography>
-            </Container>
-            <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                    <EstimateButtons
-                        onClick={(num) => console.log(num)}
-                    />
+    componentDidMount() {
+        connectToPokerPlanning(this.props.match.params.key);
+    }
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <Container component="main" className={classes.main} maxWidth="sm">
+                    <AppHeading />
+
+                    <Typography variant="body1">Sticky foolter</Typography>
                 </Container>
-            </footer>
-        </div>
-    );
+                <footer className={classes.footer}>
+                    <Container maxWidth="sm">
+                        <EstimateButtons
+                            onClick={(num) => console.log(num)}
+                        />
+                    </Container>
+                </footer>
+            </div>
+        );
+    }
 };
 
-PokerApp.propTypes = {
-
-};
-
-export default PokerApp;
+export default withStyles(useStyles)(PokerApp);
