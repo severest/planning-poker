@@ -10,15 +10,32 @@ class PokerSessionChannel < ApplicationCable::Channel
 
   def unsubscribed
     self.poker_session.users.destroy(self.user)
-    self.broadcast({type: 'disconnect', user: params[:user]})
+    self.broadcast({type: 'user_disconnect', user: self.user.get_data})
   end
 
   def appear(data)
-    self.user.name = data['name']
-    self.user.save
     self.poker_session.users.push(self.user)
-    self.broadcast({type: 'connect', user: params[:user]})
-    self.notification(self.poker_session.get_data)
+    self.broadcast({type: 'session_data', data: self.poker_session.get_data})
+  end
+
+  def joinSession(data)
+    self.user.update(name: data['name'])
+    self.broadcast({type: 'user_update', user: self.user.get_data})
+  end
+
+  def submitVote(data)
+    self.poker_session.poker_session_participants.where(user: self.user).update(vote: data['vote'])
+    self.broadcast({type: 'user_update', user: self.user.get_data, vote: data['vote']})
+  end
+
+  def showVotes
+    self.broadcast({type: 'show_votes'})
+  end
+
+  def hideVotes
+    self.poker_session.poker_session_participants.all.update(vote: nil)
+    self.broadcast({type: 'hide_votes'})
+    self.broadcast({type: 'session_data', data: self.poker_session.get_data})
   end
 
   protected

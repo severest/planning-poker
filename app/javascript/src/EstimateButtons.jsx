@@ -1,45 +1,78 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
+import {
+    submitVote,
+    showVotes,
+    hideVotes,
+} from './utils/websocket.js';
+
 
 const EsitmateButtons = ({
-    onClick,
+    onHideVotes,
+    onSubmitVote,
+    onShowVotes,
 }) => (
-    <Box display="flex">
-        <Box mr={2}>
-            <ButtonGroup color="primary">
-                <Button variant="contained" onClick={() => onClick('1')}>1</Button>
-                <Button variant="contained" onClick={() => onClick('2')}>2</Button>
-                <Button variant="contained" onClick={() => onClick('3')}>3</Button>
-                <Button variant="contained" onClick={() => onClick('5')}>5</Button>
-                <Button variant="contained" onClick={() => onClick('8')}>8</Button>
-            </ButtonGroup>
-        </Box>
-        <Box mr={1}>
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => onClick('unknown')}
-            >
-                ?
-            </Button>
+    <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box display="flex" alignItems="center">
+            <Box mr={1}>
+                <ButtonGroup color="primary">
+                    <Button variant="contained" onClick={() => onSubmitVote('1')}>1</Button>
+                    <Button variant="contained" onClick={() => onSubmitVote('2')}>2</Button>
+                    <Button variant="contained" onClick={() => onSubmitVote('3')}>3</Button>
+                    <Button variant="contained" onClick={() => onSubmitVote('5')}>5</Button>
+                    <Button variant="contained" onClick={() => onSubmitVote('8')}>8</Button>
+                </ButtonGroup>
+            </Box>
+            <Box mr={1}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => onSubmitVote('unknown')}
+                >
+                    ?
+                </Button>
+            </Box>
+            <Box>
+                <Button
+                    variant="contained"
+                    onClick={() => onSubmitVote('pass')}
+                >
+                    Pass
+                </Button>
+            </Box>
         </Box>
         <Box>
-            <Button
-                variant="contained"
-                onClick={() => onClick('pass')}
-            >
-                Pass
-            </Button>
+            <ButtonGroup>
+                <Button variant="contained" onClick={onHideVotes}>Reset</Button>
+                <Button variant="contained" onClick={onShowVotes}>Votes</Button>
+            </ButtonGroup>
         </Box>
     </Box>
 );
 
 EsitmateButtons.propTypes = {
-    onClick: PropTypes.func.isRequired,
+    onHideVotes: PropTypes.func.isRequired,
+    onSubmitVote: PropTypes.func.isRequired,
+    onShowVotes: PropTypes.func.isRequired,
 };
 
-export default EsitmateButtons;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onHideVotes: () => {
+            hideVotes();
+        },
+        onSubmitVote: (vote) => {
+            submitVote(vote);
+        },
+        onShowVotes: () => {
+            showVotes();
+        },
+    };
+};
+
+export default connect(null, mapDispatchToProps)(EsitmateButtons);

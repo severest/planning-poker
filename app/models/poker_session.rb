@@ -5,7 +5,7 @@ class PokerSession < ApplicationRecord
     def get_data
         obj = {}
         participants = self.poker_session_participants.includes(:user)
-        obj['participants'] = participants.map { |p| {name: p.user.name, user: p.user.unique_key} }
+        obj['participants'] = participants.map { |p| {user: p.user.get_data, vote: p.vote }}
         return obj
     end
 end
