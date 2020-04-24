@@ -49,7 +49,7 @@ const EsitmateButtons = ({
         <Box>
             <ButtonGroup>
                 <Button variant="contained" onClick={onHideVotes}>Reset</Button>
-                <Button variant="contained" onClick={onShowVotes}>Votes</Button>
+                <Button variant="contained" onClick={onShowVotes}>Show</Button>
             </ButtonGroup>
         </Box>
     </Box>
