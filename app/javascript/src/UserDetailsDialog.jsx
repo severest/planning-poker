@@ -16,25 +16,31 @@ const UserDetailsDialog = ({
     const [name, setName] = useState('');
     return (
         <Dialog open={open}>
-            <DialogTitle>Enter name</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    To join the planning session, enter your name.
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    label="Name"
-                    type="text"
-                    fullWidth
-                    onChange={(evt) => setName(evt.target.value)}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => onSubmit({ name })} color="primary">
-                    Join
-                </Button>
-            </DialogActions>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                onSubmit({ name });
+            }}>
+                <DialogTitle>Enter name</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To join the planning session, enter your name.
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        required
+                        margin="dense"
+                        label="Name"
+                        type="text"
+                        fullWidth
+                        onChange={(evt) => setName(evt.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button type="submit" color="primary">
+                        Join
+                    </Button>
+                </DialogActions>
+            </form>
         </Dialog>
     );
 };
