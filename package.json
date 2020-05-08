@@ -22,6 +22,12 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1",
     "webpack-dev-server": "^3.10.3"
+  },
+  "scripts": {
+    "test": "jest --watch",
+    "test:ci": "jest --watch"
   }
 }
