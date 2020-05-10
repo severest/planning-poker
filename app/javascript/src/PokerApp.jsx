@@ -5,12 +5,14 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 import AppBody from './AppBody.jsx';
 import LoadingBackdrop from './LoadingBackdrop.jsx';
 import EstimateButtons from './EstimateButtons.jsx';
 import UserDetailsDialog from './UserDetailsDialog.jsx';
 import Participant from './Participant.jsx';
+import VoteIcon from './VoteIcon.jsx';
 import {
     connectToPokerPlanning,
     joinSession,
@@ -18,6 +20,8 @@ import {
 import {
     currentUserSelector,
     namedUserSelector,
+    voteConsensusSelector,
+    votesVisibleSelector,
 } from './redux/selectors/poker-planning-session.js';
 
 
@@ -36,6 +40,7 @@ const useStyles = (theme) => ({
 class PokerApp extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object.isRequired,
+        consensus: PropTypes.string,
         currentUser: PropTypes.shape({
             user: PropTypes.shape({
                 id: PropTypes.string.isRequired,
@@ -44,11 +49,13 @@ class PokerApp extends React.PureComponent {
             vote: PropTypes.string,
         }),
         match: PropTypes.object.isRequired,
+        votesVisible: PropTypes.bool.isRequired,
         onConnectToSession: PropTypes.func.isRequired,
         onJoinSession: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
+        consensus: null,
         currentUser: null,
     }
 
@@ -59,8 +66,10 @@ class PokerApp extends React.PureComponent {
     render() {
         const {
             classes,
+            consensus,
             currentUser,
             participants,
+            votesVisible,
             onJoinSession,
         } = this.props;
         return (
@@ -72,6 +81,10 @@ class PokerApp extends React.PureComponent {
                         <Box my={3}>
                             <Paper>
                                 <Box p={3}>
+                                    <Box marginBottom={1} display="flex" alignItems="center" justifyContent="center">
+                                        <Box mx={1}><Typography variant="subtitle2">Consensus:</Typography></Box>
+                                        <VoteIcon vote={consensus} votesVisible={votesVisible} />
+                                    </Box>
                                     {participants.map((participant) => (
                                         <Participant key={participant.user.id} {...participant} />
                                     ))}
@@ -92,8 +105,10 @@ class PokerApp extends React.PureComponent {
 
 const mapStateToProps = (state) => {
     return {
+        consensus: voteConsensusSelector(state),
         currentUser: currentUserSelector(state),
         participants: namedUserSelector(state),
+        votesVisible: votesVisibleSelector(state),
     };
 };
 
