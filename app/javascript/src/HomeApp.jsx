@@ -20,6 +20,6 @@ const HomeApp = () => {
             </Box>
         </AppBody>
     );
-}
+};
 
 export default HomeApp;

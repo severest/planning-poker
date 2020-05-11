@@ -22,6 +22,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
     "eslint-plugin-jest": "^23.10.0",
@@ -33,7 +34,7 @@
   "scripts": {
     "test": "jest --watch",
     "test:ci": "jest --watch",
-    "eslint": "npx eslint app/javascript --fix"
+    "eslint": "npx eslint app/javascript --ext .js,.jsx"
   },
   "husky": {
     "hooks": {

@@ -50,6 +50,11 @@ class PokerApp extends React.PureComponent {
             vote: PropTypes.string,
         }),
         match: PropTypes.object.isRequired,
+        participants: PropTypes.arrayOf(PropTypes.shape({
+            user: PropTypes.shape({
+                id: PropTypes.string.isRequired,
+            }).isRequired,
+        })).isRequired,
         votesVisible: PropTypes.bool.isRequired,
         onConnectToSession: PropTypes.func.isRequired,
         onJoinSession: PropTypes.func.isRequired,
@@ -102,7 +107,7 @@ class PokerApp extends React.PureComponent {
             </>
         );
     }
-};
+}
 
 const mapStateToProps = (state) => {
     return {

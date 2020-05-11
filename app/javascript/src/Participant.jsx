@@ -83,7 +83,7 @@ Participant.propTypes = {
 
 Participant.defaultProps = {
     vote: null,
-}
+};
 
 const mapStateToProps = (state) => {
     return {
