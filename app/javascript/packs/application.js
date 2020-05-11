@@ -15,11 +15,7 @@ import NoMatch from '../src/NoMatch.jsx';
 import uuid from '../src/utils/uuid.js';
 
 
-let userId = localStorage.getItem('planningPokerId');
-if (!userId) {
-    userId = uuid();
-    localStorage.setItem('planningPokerId', userId);
-}
+let userId = uuid();
 window.myId = userId;
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && !PRODUCTION && window.__REDUX_DEVTOOLS_EXTENSION__());
