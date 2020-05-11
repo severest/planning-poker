@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 participants: action.data.participants,
             };
-        case UPDATE_SESSION_PARTICIPANT:
+        case UPDATE_SESSION_PARTICIPANT: {
             let newParticipants;
             if (state.participants.some(({ user }) => user.id === action.participant.user.id)) {
                 newParticipants = state.participants.map((p) => {
@@ -37,6 +37,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 participants: newParticipants,
             };
+        }
         case SET_VOTE_VISIBILITY:
             return {
                 ...state,

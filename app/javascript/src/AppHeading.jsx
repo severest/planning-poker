@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: `3px solid ${theme.palette.primary.light}`,
     },
 }));
+
 const AppHeading = () => {
     const classes = useStyles();
     return (

@@ -13,7 +13,10 @@ const UserDetailsDialog = ({
     open,
     onSubmit,
 }) => {
-    const [name, setName] = useState('');
+    const [
+        name,
+        setName
+    ] = useState('');
     return (
         <Dialog open={open}>
             <form onSubmit={(e) => {

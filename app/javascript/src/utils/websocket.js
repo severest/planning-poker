@@ -14,7 +14,7 @@ const consumer = createConsumer();
 
 export const connectToPokerPlanning = (sessionId, dispatch) => {
     consumer.subscriptions.create({ channel: "ParticipantChannel", session_id: sessionId, user: window.myId }, {
-        received(message) {
+        received() {
             // for direct messages
         }
     });

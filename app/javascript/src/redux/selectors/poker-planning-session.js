@@ -43,4 +43,4 @@ export const voteConsensusSelector = createSelector(
         }
         return consensus;
     }
-)
+);

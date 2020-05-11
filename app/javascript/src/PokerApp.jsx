@@ -37,6 +37,7 @@ const useStyles = (theme) => ({
         backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     },
 });
+
 class PokerApp extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object.isRequired,

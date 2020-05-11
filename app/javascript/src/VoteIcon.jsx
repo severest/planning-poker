@@ -11,29 +11,26 @@ import Filter5Rounded from '@material-ui/icons/Filter5Rounded';
 import Filter8Rounded from '@material-ui/icons/Filter8Rounded';
 
 
+const iconClasses = {
+    '1': Filter1Rounded,
+    '2': Filter2Rounded,
+    '3': Filter3Rounded,
+    '5': Filter5Rounded,
+    '8': Filter8Rounded,
+    'unknown': SentimentVeryDissatisfiedRounded,
+    'pass': BlockRounded,
+};
+
 const VoteIcon = ({
     vote,
     votesVisible,
 }) => {
     let voteIcon = <CropFreeRounded fontSize="large" />;
-    if (votesVisible) {
-        if (vote === '1') {
-            voteIcon = <Filter1Rounded fontSize="large" />;
-        } else if (vote === '2') {
-            voteIcon = <Filter2Rounded fontSize="large" />;
-        } else if (vote === '3') {
-            voteIcon = <Filter3Rounded fontSize="large" />;
-        } else if (vote === '5') {
-            voteIcon = <Filter5Rounded fontSize="large" />;
-        } else if (vote === '8') {
-            voteIcon = <Filter8Rounded fontSize="large" />;
-        } else if (vote === 'unknown') {
-            voteIcon = <SentimentVeryDissatisfiedRounded fontSize="large" />;
-        } else if (vote === 'pass') {
-            voteIcon = <BlockRounded fontSize="large" />;
-        }
+    if (votesVisible && iconClasses[vote]) {
+        const IconClass = iconClasses[vote];
+        voteIcon = <IconClass fontSize="large" />;
     }
-    return voteIcon
+    return voteIcon;
 };
 
 VoteIcon.propTypes = {

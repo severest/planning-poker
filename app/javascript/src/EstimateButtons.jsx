@@ -61,7 +61,7 @@ EsitmateButtons.propTypes = {
     onShowVotes: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
     return {
         onHideVotes: () => {
             hideVotes();

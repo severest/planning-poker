@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary,
     },
 }));
+
 const LoadingBackdrop = ({
     open,
 }) => {

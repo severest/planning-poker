@@ -6,22 +6,20 @@ import Typography from '@material-ui/core/Typography';
 import AppBody from './AppBody.jsx';
 
 
-class HomeApp extends React.PureComponent {
-    render() {
-        return (
-            <AppBody>
-                <Box my={3} textAlign="center">
-                    <Paper>
-                        <Box p={3}>
-                            <Typography variant="subtitle1">
-                                There ain't nothing here.
-                            </Typography>
-                        </Box>
-                    </Paper>
-                </Box>
-            </AppBody>
-        );
-    }
-};
+const HomeApp = () => {
+    return (
+        <AppBody>
+            <Box my={3} textAlign="center">
+                <Paper>
+                    <Box p={3}>
+                        <Typography variant="subtitle1">
+                            There ain&apos;t nothing here.
+                        </Typography>
+                    </Box>
+                </Paper>
+            </Box>
+        </AppBody>
+    );
+}
 
 export default HomeApp;
