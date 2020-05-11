@@ -48,7 +48,7 @@ export const submitVote = (vote) => {
 };
 
 export const showVotes = () => {
-    pokerPlanning.perform('showVotes');
+    pokerPlanning.perform('showVotes')
 };
 
 export const hideVotes = () => {
