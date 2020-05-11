@@ -21,7 +21,7 @@ const UserDetailsDialog = ({
         <Dialog open={open}>
             <form onSubmit={(e) => {
                 e.preventDefault();
-                onSubmit({ name });
+                onSubmit({ name, spectator: false });
             }}>
                 <DialogTitle>Enter name</DialogTitle>
                 <DialogContent>
@@ -39,6 +39,9 @@ const UserDetailsDialog = ({
                     />
                 </DialogContent>
                 <DialogActions>
+                    <Button onClick={() => onSubmit({ spectator: true })}>
+                        Spectate
+                    </Button>
                     <Button type="submit" color="primary">
                         Join
                     </Button>

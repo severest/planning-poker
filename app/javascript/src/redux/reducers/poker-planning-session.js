@@ -36,6 +36,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 participants: newParticipants,
+                votesVisible: newParticipants.filter(({ user, vote }) => user.name && user.name.trim() !== '' && !user.spectator && vote === null).length === 0,
             };
         }
         case SET_VOTE_VISIBILITY:

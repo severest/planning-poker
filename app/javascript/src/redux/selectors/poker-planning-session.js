@@ -12,7 +12,14 @@ export const currentUserSelector = createSelector(
 export const namedUserSelector = createSelector(
     pokerPlanningSession,
     (pokerSession) => {
-        return pokerSession.participants.filter(({ user }) => user.name && user.name.trim() !== '');
+        return pokerSession.participants.filter(({ user }) => user.name && user.name.trim() !== '' && !user.spectator);
+    }
+);
+
+export const spectatorUserSelector = createSelector(
+    pokerPlanningSession,
+    (pokerSession) => {
+        return pokerSession.participants.filter(({ user }) => user.spectator);
     }
 );
 

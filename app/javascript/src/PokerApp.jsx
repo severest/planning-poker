@@ -20,6 +20,7 @@ import {
 import {
     currentUserSelector,
     namedUserSelector,
+    spectatorUserSelector,
     voteConsensusSelector,
     votesVisibleSelector,
 } from './redux/selectors/poker-planning-session.js';
@@ -46,11 +47,17 @@ class PokerApp extends React.PureComponent {
             user: PropTypes.shape({
                 id: PropTypes.string.isRequired,
                 name: PropTypes.string,
+                spectator: PropTypes.bool.isRequired,
             }).isRequired,
             vote: PropTypes.string,
         }),
         match: PropTypes.object.isRequired,
         participants: PropTypes.arrayOf(PropTypes.shape({
+            user: PropTypes.shape({
+                id: PropTypes.string.isRequired,
+            }).isRequired,
+        })).isRequired,
+        spectators: PropTypes.arrayOf(PropTypes.shape({
             user: PropTypes.shape({
                 id: PropTypes.string.isRequired,
             }).isRequired,
@@ -75,13 +82,14 @@ class PokerApp extends React.PureComponent {
             consensus,
             currentUser,
             participants,
+            spectators,
             votesVisible,
             onJoinSession,
         } = this.props;
         return (
             <>
                 <LoadingBackdrop open={!currentUser} />
-                <UserDetailsDialog open={currentUser !== null && !currentUser.user.name} onSubmit={onJoinSession} />
+                <UserDetailsDialog open={currentUser !== null && (!currentUser.user.name && !currentUser.user.spectator)} onSubmit={onJoinSession} />
                 <div className={classes.root}>
                     <AppBody>
                         <Box my={3}>
@@ -94,13 +102,16 @@ class PokerApp extends React.PureComponent {
                                     {participants.map((participant) => (
                                         <Participant key={participant.user.id} {...participant} />
                                     ))}
+                                    <Box marginTop={1} display="flex" alignItems="center" justifyContent="center">
+                                        <Typography variant="subtitle2">+{spectators.length} spectator(s)</Typography>
+                                    </Box>
                                 </Box>
                             </Paper>
                         </Box>
                     </AppBody>
                     <footer className={classes.footer}>
                         <Container maxWidth="sm">
-                            <EstimateButtons />
+                            <EstimateButtons spectator={currentUser && currentUser.user.spectator} />
                         </Container>
                     </footer>
                 </div>
@@ -114,6 +125,7 @@ const mapStateToProps = (state) => {
         consensus: voteConsensusSelector(state),
         currentUser: currentUserSelector(state),
         participants: namedUserSelector(state),
+        spectators: spectatorUserSelector(state),
         votesVisible: votesVisibleSelector(state),
     };
 };

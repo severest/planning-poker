@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_142727) do
+ActiveRecord::Schema.define(version: 2020_05_11_160543) do
 
   create_table "poker_session_participants", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_04_23_142727) do
     t.string "unique_key"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "spectator", default: false
   end
 
   add_foreign_key "poker_session_participants", "poker_sessions"

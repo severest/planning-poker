@@ -19,7 +19,7 @@ class PokerSessionChannel < ApplicationCable::Channel
   end
 
   def joinSession(data)
-    self.user.update(name: data['name'])
+    self.user.update(name: data['name'], spectator: data['spectator'])
     self.broadcast({type: 'user_update', user: self.user.get_data})
   end
 
