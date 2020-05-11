@@ -29,16 +29,24 @@
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "lint-staged": "^10.2.2",
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
     "test": "jest --watch",
     "test:ci": "jest --watch",
-    "eslint": "npx eslint app/javascript --ext .js,.jsx"
+    "test:precommit": "jest --findRelatedTests",
+    "eslint": "npx eslint app/javascript --ext .js,.jsx --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run eslint"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "yarn run eslint",
+      "yarn run test:precommit"
+    ]
   }
 }
