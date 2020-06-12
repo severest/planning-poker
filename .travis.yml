@@ -1,6 +1,6 @@
-language:
-  - ruby
-  - node_js
+language: ruby
+node_js:
+  - 12
 rvm:
   - 2.7.1
 install:
