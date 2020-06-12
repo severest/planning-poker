@@ -1,0 +1,27 @@
+language: ruby
+rvm:
+  - 2.7.1
+install:
+  - wget -N https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz -P ~/
+  - tar xvzf ~/geckodriver-v0.26.0-linux64.tar.gz -C ~/
+  - rm ~/geckodriver-v0.26.0-linux64.tar.gz
+  - sudo mv -f ~/geckodriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/geckodriver
+  - sudo ln -s /usr/local/share/geckodriver /usr/local/bin/geckodriver
+  - yarn install --pure-lockfile
+  - bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle}
+  - bin/rails assets:precompile
+script:
+  - bin/rails db:create
+  - RAILS_ENV=test bin/rails db:migrate --trace
+  - bin/rails db:test:prepare
+  - bin/rails test
+  - yarn run eslint
+  - yarn run test:ci
+dist: trusty
+sudo: required
+env:
+  global:
+    - MOZ_HEADLESS=1
+addons:
+  firefox: latest

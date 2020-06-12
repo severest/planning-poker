@@ -34,9 +34,10 @@
   },
   "scripts": {
     "test": "jest --watch",
-    "test:ci": "jest --watch",
+    "test:ci": "jest",
     "test:precommit": "jest --findRelatedTests",
-    "eslint": "npx eslint app/javascript --ext .js,.jsx --fix"
+    "eslint:fix": "eslint app/javascript --ext .js,.jsx --fix",
+    "eslint": "eslint app/javascript --ext .js,.jsx"
   },
   "husky": {
     "hooks": {
@@ -45,7 +46,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "yarn run eslint",
+      "yarn run eslint:fix",
       "yarn run test:precommit"
     ]
   }
