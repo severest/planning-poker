@@ -1,9 +1,9 @@
 language: ruby
-node_js:
-  - 12
 rvm:
   - 2.7.1
 install:
+  - nvm install
+  - nvm use
   - wget -N https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz -P ~/
   - tar xvzf ~/geckodriver-v0.26.0-linux64.tar.gz -C ~/
   - rm ~/geckodriver-v0.26.0-linux64.tar.gz
@@ -21,7 +21,6 @@ script:
   - yarn run eslint
   - yarn run test:ci
 dist: trusty
-sudo: required
 env:
   global:
     - MOZ_HEADLESS=1
