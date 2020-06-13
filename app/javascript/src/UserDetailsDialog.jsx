@@ -33,6 +33,7 @@ const UserDetailsDialog = ({
                         required
                         margin="dense"
                         label="Name"
+                        name="Name"
                         type="text"
                         fullWidth
                         onChange={(evt) => setName(evt.target.value)}
