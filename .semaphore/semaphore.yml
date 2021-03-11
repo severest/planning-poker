@@ -1,0 +1,32 @@
+version: v1.0
+name: planning-poker
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+      jobs:
+        - name: Test
+          commands:
+            - checkout
+            - sem-service start mysql
+            - sem-version node 12.16.3
+            - npm install -g yarn
+            - sem-version ruby 2.7.1
+            - cache restore
+            - yarn install --pure-lockfile
+            - bundle install --deployment --path vendor/bundle
+            - cache store
+            - 'bin/rails assets:precompile'
+            - 'bin/rails db:create'
+            - 'bin/rails db:migrate --trace'
+            - 'bin/rails db:test:prepare'
+            - bin/rails test
+            - 'bin/rails test:system'
+            - yarn run eslint
+            - 'yarn run test:ci'
