@@ -1,6 +1,6 @@
 # Planning poker
 
-[![Build Status](https://travis-ci.org/severest/planning-poker.svg?branch=master)](https://travis-ci.org/severest/planning-poker)
+[![Build Status](https://sean.semaphoreci.com/badges/planning-poker/branches/master.svg?style=shields)](https://sean.semaphoreci.com/projects/planning-poker)
 
 An app to remotely estimate issues during a Scrum planning session. Users can choose their estimate and when all non-spectators
 have responded the consensus is revealed.
